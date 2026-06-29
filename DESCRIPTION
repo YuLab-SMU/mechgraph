@@ -1,0 +1,20 @@
+Package: mechgraph
+Title: Mechanism Evidence Graph Data Model
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given="Guangchuang", family="Yu", email = "guangchuangyu@gmail.com", role = c("aut", "cre"))
+    )
+Author: Guangchuang Yu [aut, cre]
+Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
+Description: Provides a lightweight graph data model for representing,
+    combining, querying, and summarizing evidence-backed biological mechanism
+    graphs.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Imports:
+    yulab.utils
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

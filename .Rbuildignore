@@ -1,0 +1,8 @@
+^\\.git$
+^\\.agents$
+^\\.Rproj\\.user$
+^\\.Rhistory$
+^\\.RData$
+^\\.Ruserdata$
+^\\.Rcheck$
+^\\.\\.Rcheck$
