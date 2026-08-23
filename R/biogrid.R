@@ -47,7 +47,7 @@ mg_biogrid_download <- function(version = "latest",
 
     destfile <- file.path(destdir, basename(url))
     if (!cache || !file.exists(destfile)) {
-        yulab.utils:::mydownload(url, destfile)
+        .mg_download(url, destfile)
     }
 
     destfile
@@ -134,7 +134,7 @@ parse_biogrid_tab3 <- function(file, taxon_id = NULL) {
     edges <- data.frame(
         from = from,
         to = to,
-        type = "physical_interaction",
+        type = "ppi",
         source = "BioGRID",
         evidence = value_or_na(x, "Experimental System"),
         evidence_type = value_or_na(x, "Experimental System Type"),
@@ -182,7 +182,7 @@ parse_biogrid_mitab <- function(file, taxon_id = NULL) {
     edges <- data.frame(
         from = from,
         to = to,
-        type = "physical_interaction",
+        type = "ppi",
         source = "BioGRID",
         evidence = if (ncol(x) >= 7) x[[7]] else NA_character_,
         pmid = if (ncol(x) >= 9) x[[9]] else NA_character_,
