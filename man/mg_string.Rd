@@ -33,7 +33,8 @@ mg_from_string(file = NULL, taxon_id = 9606, version = "12.0",
 \item{version}{STRING release version (e.g. \code{"12.0"}).}
 \item{network}{Which STRING table: \code{"functional"} (protein.links), \code{"physical"} (protein.physical.links), \code{"detailed"} (protein.links.detailed), \code{"aliases"} (protein.aliases) or \code{"info"} (protein.info). \code{mg_from_string()} accepts \code{"functional"} (default) and \code{"physical"}.}
 \item{cache}{Whether to reuse an existing cached download.}
-\item{destdir}{Optional cache directory. Defaults to a STRING directory under \code{yulab.utils::user_dir("mechgraph")}.}
+\item{destdir}{Optional cache directory. Defaults to a session-scoped directory
+  under \code{tempdir()}; pass an explicit path for persistent caching.}
 \item{links}{A local STRING links table path or data.frame (columns \code{protein1}, \code{protein2}, \code{combined_score}).}
 \item{aliases}{A local \code{protein.aliases} table path or data.frame (columns \code{#string_protein_id}, \code{alias}, \code{source}). Required unless \code{keytype} is \code{"ensembl_protein"} or \code{"string_id"}.}
 \item{info}{A local \code{protein.info} table path or data.frame. Used for preferred-name node labels when \code{labels = TRUE}.}
@@ -52,12 +53,44 @@ The full human \code{protein.links} table is large (~1.5 GB uncompressed); the d
 
 The identifier mapping currently assumes the human (9606) \code{protein.aliases} table: the \code{Ensembl_HGNC_*} alias sources used by \code{"entrez"}, \code{"symbol"}, \code{"uniprot"} and \code{"ensembl_gene"} exist only for human. For other species use \code{keytype = "ensembl_protein"} or \code{"string_id"} (identity mappings) until per-species alias sources are added.
 }
+\value{
+\itemize{
+  \item \code{mg_string_versions()} returns a character vector of supported
+    STRING release versions (\code{"12.0"}).
+  \item \code{mg_string_species()} returns a \code{data.frame} of STRING
+    species for the requested release (columns \code{taxon_id},
+    \code{STRING_type}, \code{STRING_name_compact}, \code{official_name_NCBI},
+    \code{domain}).
+  \item \code{mg_string_file_url()} returns the download URL as a character
+    string.
+  \item \code{mg_string_download()} returns the path to the downloaded (or
+    cached) file as a character string.
+  \item \code{mg_string_parse()} returns a list with components \code{nodes}
+    and \code{edges}, the two \code{data.frame}s to be passed to
+    \code{mg_from_edges()}.
+  \item \code{mg_from_string()} returns a \code{mechgraph} object with
+    \code{type = "ppi"} edges carrying the STRING \code{combined_score} and
+    provenance metadata (source, version, taxon_id, network, score
+    threshold, keytype, URL, license).
+}
+}
 \examples{
+## Build a mechgraph from a small STRING links table (no download)
+links <- data.frame(
+    protein1 = c("9606.ENSP00000000233", "9606.ENSP00000000412"),
+    protein2 = c("9606.ENSP00000000412", "9606.ENSP00000001008"),
+    combined_score = c(800, 700),
+    stringsAsFactors = FALSE
+)
+mg <- mg_from_string(file = links, keytype = "string_id", labels = FALSE)
+mg
+mg_edges(mg)
+
 \dontrun{
-  mg <- mg_from_string(taxon_id = 9606, score_threshold = 400,
-                       keytype = "entrez")
-  mg
-  mg_edges(mg)
-  mg_string_species()
+## Download and build the human STRING network (large: ~80 MB
+## compressed, ~1.5 GB uncompressed) and fetch the species list.
+mg <- mg_from_string(taxon_id = 9606, score_threshold = 400,
+                     keytype = "entrez")
+mg_string_species()
 }
 }

@@ -29,10 +29,14 @@ as_mechgraph <- function(x, ...) {
     UseMethod("as_mechgraph")
 }
 
+#' @export
+#' @noRd
 as_mechgraph.data.frame <- function(x, ...) {
     mg_from_edges(x, ...)
 }
 
+#' @export
+#' @noRd
 as_mechgraph.mechgraph <- function(x, ...) {
     x
 }

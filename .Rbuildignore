@@ -1,5 +1,6 @@
 ^\.git$
 ^\.agents$
+^\.reasonix$
 ^\.Rproj\.user$
 ^\.Rhistory$
 ^\.RData$
@@ -9,3 +10,4 @@
 ^CRAN-SUBMISSION$
 ^mechgraph-package-spec\.md$
 CRAN-SUBMISSION
+Makefile

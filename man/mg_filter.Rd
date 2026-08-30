@@ -22,3 +22,10 @@ mg_induced_subgraph(x, nodes)
 \description{
 Filter node and edge tables and return a new mechgraph object.
 }
+\value{
+A new \code{mechgraph} object with the filtered node and/or edge tables and
+the metadata of the input graph. \code{mg_filter_nodes()} and
+\code{mg_induced_subgraph()} keep only the selected nodes and the edges whose
+both endpoints are among them; \code{mg_filter_edges()} keeps the selected
+edges and leaves the node table unchanged.
+}

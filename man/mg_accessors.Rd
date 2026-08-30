@@ -19,3 +19,17 @@ mg_sources(x)
 \description{
 Return the node table, edge table, metadata list, or unique source labels from a mechgraph object.
 }
+\value{
+\itemize{
+  \item \code{mg_nodes()} returns the node table, a \code{data.frame} with
+    the required columns \code{id}, \code{type}, \code{label} plus any
+    additional node columns.
+  \item \code{mg_edges()} returns the edge table, a \code{data.frame} with
+    the required columns \code{from}, \code{to}, \code{type} plus any
+    additional edge columns.
+  \item \code{mg_metadata()} returns the metadata \code{list} stored in the
+    graph.
+  \item \code{mg_sources()} returns a sorted character vector of the unique
+    non-missing source labels found in the node and edge tables.
+}
+}

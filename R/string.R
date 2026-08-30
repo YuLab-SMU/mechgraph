@@ -70,16 +70,17 @@ mg_string_file_url <- function(taxon_id = 9606,
 # Download a STRING table (cached)
 #
 # Downloads one of the STRING tables into a cache directory (default
-# `yulab.utils::user_dir("mechgraph")/string`) and returns the local path.
-# The download is skipped when the file is already cached.
+# `file.path(tempdir(), "mechgraph", "string")`, i.e. a session-scoped
+# temporary directory) and returns the local path. The download is skipped
+# when the file is already cached.
 #
 # @param taxon_id NCBI taxonomy id (e.g. 9606 for human).
 # @param version STRING release version (e.g. "12.0").
 # @param network Which STRING table (see [mg_string_file_url()]).
 # @param cache logical, reuse a previously downloaded file.
-# @param destdir optional cache directory (defaults to the user cache dir).
+# @param destdir optional cache directory (defaults to a session cache
+#   under `tempdir()`; pass an explicit path for persistent caching).
 # @return Path to the downloaded (or cached) file.
-# @importFrom yulab.utils user_dir
 # @export
 mg_string_download <- function(taxon_id = 9606,
                                version = "12.0",
@@ -92,7 +93,7 @@ mg_string_download <- function(taxon_id = 9606,
                               network = network)
 
     if (is.null(destdir)) {
-        destdir <- file.path(yulab.utils::user_dir("mechgraph"), "string")
+        destdir <- file.path(tempdir(), "mechgraph", "string")
     }
     if (!dir.exists(destdir)) {
         dir.create(destdir, recursive = TRUE, showWarnings = FALSE)
@@ -133,7 +134,7 @@ mg_string_species <- function(version = "12.0",
         "https://stringdb-downloads.org/download/species.v",
         version, ".txt"
     )
-    destdir <- file.path(yulab.utils::user_dir("mechgraph"), "string")
+    destdir <- file.path(tempdir(), "mechgraph", "string")
     if (!dir.exists(destdir)) {
         dir.create(destdir, recursive = TRUE, showWarnings = FALSE)
     }

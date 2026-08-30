@@ -36,6 +36,8 @@ is_mechgraph <- function(x) {
     inherits(x, "mechgraph")
 }
 
+#' @export
+#' @noRd
 print.mechgraph <- function(x, ...) {
     cat("<mechgraph>\n")
     cat("  nodes: ", nrow(x$nodes), "\n", sep = "")
@@ -51,6 +53,8 @@ print.mechgraph <- function(x, ...) {
     invisible(x)
 }
 
+#' @export
+#' @noRd
 as.data.frame.mechgraph <- function(x, row.names = NULL, optional = FALSE, ...) {
     mg_edges(x)
 }

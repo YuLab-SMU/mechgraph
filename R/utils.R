@@ -1,9 +1,7 @@
-## stable wrapper over the yulab.utils download helper.
-## `mydownload` is not exported by yulab.utils; resolve it at run time via
-## getFromNamespace (the CRAN-friendly way to use an internal) instead of
-## a `:::` call.
+## plain download wrapper so callers share one code path; equivalent to
+## the fallback branch of yulab.utils::mydownload (utils::download.file)
 .mg_download <- function(url, destfile) {
-    getFromNamespace("mydownload", "yulab.utils")(url, destfile)
+    utils::download.file(url = url, destfile = destfile, quiet = TRUE)
 }
 
 rbind_fill <- function(...) {

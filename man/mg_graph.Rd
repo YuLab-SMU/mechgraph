@@ -20,3 +20,13 @@ is_mechgraph(x)
 \description{
 Create the lightweight S3 list object used by mechgraph.
 }
+\value{
+\code{mg_graph()} returns a \code{mechgraph} object: an S3 list with
+components \code{nodes} (a \code{data.frame} with columns \code{id},
+\code{type}, \code{label}), \code{edges} (a \code{data.frame} with columns
+\code{from}, \code{to}, \code{type}), and \code{metadata} (a named list).
+When \code{validate = TRUE} the object is checked with \code{mg_validate()}
+before being returned. \code{mg_empty()} returns such an object with empty
+node and edge tables. \code{is_mechgraph()} returns \code{TRUE} if \code{x}
+inherits from class \code{"mechgraph"} and \code{FALSE} otherwise.
+}

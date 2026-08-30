@@ -39,7 +39,7 @@ mg_biogrid_download <- function(version = "latest",
     url <- mg_biogrid_file_url(version = version, dataset = dataset, format = format)
 
     if (is.null(destdir)) {
-        destdir <- file.path(yulab.utils::user_dir("mechgraph"), "biogrid")
+        destdir <- file.path(tempdir(), "mechgraph", "biogrid")
     }
     if (!dir.exists(destdir)) {
         dir.create(destdir, recursive = TRUE, showWarnings = FALSE)

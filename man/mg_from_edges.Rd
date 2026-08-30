@@ -17,3 +17,11 @@ as_mechgraph(x, ...)
 \description{
 Create a mechgraph from a plain edge list. If \code{nodes} is missing, nodes are inferred from edge endpoints.
 }
+\value{
+\code{mg_from_edges()} returns a \code{mechgraph} object (an S3 list with
+components \code{nodes}, \code{edges}, and \code{metadata}). When \code{nodes}
+is missing, a node table with \code{type = "unknown"} is inferred from the
+unique edge endpoints. \code{as_mechgraph()} returns the coerced object: for a
+\code{data.frame} it returns \code{mg_from_edges(x, ...)} and for a
+\code{mechgraph} it returns the object unchanged.
+}

@@ -7,14 +7,22 @@ Authors@R: c(
 Author: Guangchuang Yu [aut, cre]
 Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>
 Description: Provides a lightweight graph data model for representing,
-    combining, querying, and summarizing evidence-backed biological mechanism
-    graphs.
+    combining, querying, and summarizing evidence-backed biological
+    mechanism graphs. A mechgraph is an S3 list holding a node table, an
+    edge table, and provenance metadata. The package implements builders
+    that convert STRING and BioGRID interaction tables into mechgraph
+    objects, combiners (mg_bind(), mg_combine()) that merge graphs while
+    preserving duplicate evidence records, accessors (mg_nodes(),
+    mg_edges(), mg_metadata()) and mutators (mg_add_*(), mg_drop_*()) for
+    node and edge tables, filters by type, source, identifier, and score,
+    induced-subgraph construction, structural validation (mg_validate()),
+    and quality-control summaries (mg_qc()).
+    Szklarczyk et al. (2023) <doi:10.1093/nar/gkac1000>
+    Oughtred et al. (2021) <doi:10.1002/pro.3938>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Imports:
-    yulab.utils
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0

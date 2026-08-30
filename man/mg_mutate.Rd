@@ -22,3 +22,14 @@ mg_drop_edges(x, edges)
 \description{
 Add or remove nodes and edges while preserving the mechgraph table schema.
 }
+\value{
+A new \code{mechgraph} object with the modified node and/or edge tables; the
+input graph is left unchanged. \code{mg_add_nodes()} and \code{mg_add_edges()}
+row-bind the new records onto the existing tables (with
+\code{add_missing_nodes = TRUE}, \code{mg_add_edges()} creates
+\code{type = "unknown"} nodes for endpoints absent from the graph).
+\code{mg_drop_nodes()} removes the given nodes and every edge incident to
+them; \code{mg_drop_edges()} removes the given edges (a data frame of
+\code{from}/\code{to}/\code{type} rows, numeric row indices, or a logical
+mask) while keeping all nodes.
+}
